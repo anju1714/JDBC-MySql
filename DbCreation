@@ -30,3 +30,101 @@ public class Samosa {
 
 }
 
+Q 2] how to insert a data in to created table ==> so there areto way first is tradition nal way and second is advance or updated way 
+
+first is traditonal waay =
+\ 
+
+
+
+public static void main( String[] args )
+    {
+		
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/customer";
+		String user ="root";
+		String password = "Anju818002";
+		
+		//String sq = "create table CustomerTable(custmId int, custName varchar(20) ,custmMono int)";
+		//String sq2 = "select * from CustomerTable";
+		
+		Class.forName(driver);
+		Connection con =DriverManager.getConnection(url,user,password);
+		
+		Statement st = con.createStatement();
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter customer Id :- ");
+		int id = sc.nextInt();
+		
+		System.out.println("Enter a customer name :- ");
+		String name =sc.next();
+		
+		System.out.println("Enter a customer Mobilr number :- ");
+		long number = sc.nextLong();
+		
+		String sq = "insert into CustomerTable values("+id+" ,'"+name+ "',  "+number+" )";
+		
+		System.out.println("the query of you dynamic input is ");
+		System.out.println(sq);
+}
+
+#*# Advanced way ==>
+avove method is ridk if we forgot do add any coma or singl qute then we get sql exception to avoide that thair is short cut is
+String sq = String.format("insert into CustomerTable values(%i , '%s' , %l), id , name , number ");
+
+hers a String class contain static method format ()
+public static void main(String[] args)throws Exception {
+		// TODO Auto-generated method stub
+		
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/customer";
+		String user ="root";
+		String password = "Anju818002";
+		
+		
+		Class.forName(driver);
+		Connection con =DriverManager.getConnection(url,user,password);
+		
+		Statement st = con.createStatement();
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter customer Id :- ");
+		int id = sc.nextInt();
+		
+		System.out.println("Enter a customer name :- ");
+		String name =sc.next();
+		
+		System.out.println("Enter a customer Mobilr number :- ");
+		long number = sc.nextLong();
+		
+		//String sq = "insert into CustomerTable values("+id+" ,'"+name+ "',  "+number+" )";
+		
+		String sq = String.format("insert into CustomerTable(custmId ,custName,custmMono)values(%d,'%s',%d)", id, name, number);
+		
+		System.out.println("the query of you dynamic input is ");
+		st.executeUpdate(sq);
+		System.out.println(sq);
+		
+		
+		
+		
+		
+		con.close();
+		
+		
+		
+	}
+
+
+
+
+		
+
+
+
+
+
+
