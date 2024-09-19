@@ -103,6 +103,8 @@ public static void main(String[] args)throws Exception {
 		//String sq = "insert into CustomerTable values("+id+" ,'"+name+ "',  "+number+" )";
 		
 		String sq = String.format("insert into CustomerTable(custmId ,custName,custmMono)values(%d,'%s',%d)", id, name, number);
+
+	//String sq = String.format("insert into CustomerTable values(%d,'%s',%d)", id, name, number);
 		
 		System.out.println("the query of you dynamic input is ");
 		st.executeUpdate(sq);
@@ -117,9 +119,68 @@ public static void main(String[] args)throws Exception {
 		
 		
 	}
+Q 4 ] Program to insert Multiple Rows===>
+public static void main(String[] args)throws Exception {
+		// program to insert multiple rows
+		
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/customer";
+		String user ="root";
+		String password = "Anju818002";
+		
+		
+		Class.forName(driver);
+		Connection con =DriverManager.getConnection(url,user,password);
+		
+		Statement st = con.createStatement();
+		
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			System.out.println("Enter customer id :");
+			int id = sc.nextInt();
+			
+			System.out.println("Enter Customer name");
+			String name = sc.nextLine();
+			
+			System.out.println("Enter customr numner ");
+			int number = sc.nextInt();
+			
+			String sq =String.format("insert into CustomerTable values(%d,'%s',%d)",id,name,number);
+			
+			st.executeUpdate(sq);
+			
+			System.out.print("do u want to inser more record  for Yes or No ");
+			String option = sc.next();
+			if(option.equalsIgnoreCase("no")) {
+				break;
+			}
+				
+		}
+		System.out.println("insertion update successfuly");
 
+st.close();
+        con.close();
+		con.close();
+		
+		
+		
+	}
 
+@ 4 ]   Program to Delete Multiple Rows
 
+System.out.println("enter id you wont to delete : = ");
+		int cut =sc.nextInt();
+		
+		String sq1 =String.format("delete from CustomerTable where custmId >= %d",cut);
+		
+		int update = st.executeUpdate(sq1);
+		System.out.println("the number of id are deleted : " + update);
+		
+
+Q 5 ]  Selecting Particular Columns From the Table 
+Note = order of colum in database and order of column in ResultSet need not be same .
+our jdbc code is bassed on resultset bot on databse so for exaple if we have a 4 colum in our database but i want to show a data of only two column 
+then we dont conside a database 
 
 		
 
